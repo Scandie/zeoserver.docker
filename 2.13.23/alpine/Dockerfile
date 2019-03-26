@@ -7,13 +7,10 @@ RUN addgroup -g 500 plone \
 
 COPY buildout.cfg /plone/zeoserver/
 
-ENV ZC_BUILDOUT 2.5.0
-ENV SETUPTOOLS  18.5
-
 RUN apk add --no-cache --virtual .build-deps \
     gcc \
     libc-dev \
- && pip install zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS \
+ && pip install zc.buildout setuptools\
  && cd /plone/zeoserver \
  && buildout -c buildout.cfg \
  && chown -R plone:plone /plone /data \
